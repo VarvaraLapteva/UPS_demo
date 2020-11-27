@@ -1,2 +1,2 @@
 # UPS_demo
-demography
+simple demography
