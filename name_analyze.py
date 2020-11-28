@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 
 import pandas as pd
-import matplotlib.pyplot as plt
-
-# plt.style.use('ggplot')
-# plt.rcParams['figure.figsize'] = (15, 5)
-
 
 def guess_gender(name_arr, last_chars=1):
     """ Ввод - список имён и количество последних букв в имени для повышения точности проверки
@@ -34,8 +29,6 @@ def calculate_occurrances(pd_df, end_length):
                     res_dict[name.strip()[endswith:].lower()] += pd_df.loc[name]["NumberOfPersons"]
                 else:
                     res_dict[name.strip()[endswith:].lower()] = pd_df.loc[name]["NumberOfPersons"]
-                if pd_df.loc[name]["NumberOfPersons"] == 5:
-                    pass
         except IndexError:
             pass
     return res_dict
@@ -56,7 +49,7 @@ def calculate_name_weight(name, names_dict, last_letters=3):
     :return: обращение Уважаемый/Уважаемая
     :rtype: str
     """
-    test_name = name[-last_letters:].lower() if len(name) >= 3 else name.lower()
+    test_name = name[-last_letters:].lower() if len(name) > last_letters else name.lower()
 
     def sub_calculation(tmp_dict, tmp_name):
         name_len = len(tmp_name)
@@ -95,12 +88,7 @@ girls_df = pd.DataFrame(girls_ordered, columns=["Letter", "Girls"])
 result = boys_df.merge(girls_df, how='outer').fillna(0).sort_values("Letter", axis=0).set_index("Letter")
 print(result.to_string())
 
-# Uncomment the 2 lines below to display the plot
-# result.plot(kind='bar')
-# plt.show()
-
-# Test guiessing
+# Для тестирования берём последние три буквы
 name_arr = ["Бек", "Гюльчатай", "Мамед", "Катирута", "Алибек", "Яндырбай", "Илья", "Николай",
             "Ильяс", "Ия", "Ая", "Зоя", "Немезиди", "Сергей", "Ёж", "Александр"]
 guess_gender(sorted(name_arr), 3)
-
