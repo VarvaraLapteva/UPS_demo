@@ -65,7 +65,7 @@ def calculate_name_weight(name, names_dict, last_letters=3):
     elif girl_w[1] > boy_w[1] or (boy_w[1] == girl_w[1] and boy_w[0] < girl_w[0]):
         prefix = "Уважаемая "
     else:
-        prefix = "Неведомая тварь "
+        prefix = "Некто "
     return prefix
 
 
