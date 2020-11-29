@@ -21,6 +21,7 @@ def guess_gender(name_arr, last_chars=1):
 
 
 def calculate_occurrances(pd_df, end_length):
+    # формируем словарь {последние буквы, количество}
     res_dict = {}
     for name in pd_df.index:
         try:
@@ -80,8 +81,7 @@ names_dict = {"boys": calculate_occurrances(boy_names, 1),
 
 boys_ordered = [(x, names_dict["boys"][x]) for x in sorted(names_dict["boys"].keys())]
 girls_ordered = [(x, names_dict["girls"][x]) for x in sorted(names_dict["girls"].keys())]
-#
-#
+
 result_columns = ["Letter", "Boys", "Girls"]
 boys_df = pd.DataFrame(boys_ordered, columns=["Letter", "Boys"])
 girls_df = pd.DataFrame(girls_ordered, columns=["Letter", "Girls"])
